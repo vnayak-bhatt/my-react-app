@@ -5,28 +5,23 @@ class ProductTable extends React.Component{
         super(props);
     }
     render(){
-        let inventoryData = this.props.inventory;
-        console.log(inventoryData, 'id=======');
-        let filterdData = inventoryData.filter(e=>
+        //filters data on te basis on search via input
+        let filteredData = this.props.inventory.filter(e=>
             e.name.includes(this.props.searchInput)
         );
-        console.log(filterdData, 'datafiltered');
-
-        let stockFilterd;
+        //checks if data stocked or not
+        let stockFiltered;
         if(this.props.inStockChecked === true){
-            stockFilterd = filterdData.filter(e=> e.isInStock === true);
+            stockFiltered = filteredData.filter(e=> e.stocked === true);
         }else{
-            stockFilterd = filterdData;
+            stockFiltered = filteredData;
         }
-        console.log(stockFilterd, 'stockfiltered');
-        const groupedMap = stockFilterd.reduce(
+        //this functions groupbys the data on the basis of category name e.category
+        const groupedMap = stockFiltered.reduce(
             (entryMap, e) => entryMap.set(e.category, [...entryMap.get(e.category) || [], e]),
             new Map()
         );
 
-        console.log([...groupedMap.keys()].map(data => {
-            console.log(data, 'data')
-        }));
      return(
          <React.Fragment>
              <table border="1">
@@ -37,14 +32,15 @@ class ProductTable extends React.Component{
                  </tr>
                  </thead>
                  <tbody>
+                 {/*map function renders the list*/}
                  {[...groupedMap.keys()].map((item, key) => {
                      return <React.Fragment key={key + 'key'}>
                          <tr key="key" className="category">
                              <td colSpan={2}>{item}</td>
                          </tr>
-                         {groupedMap.get(item).map((product, i) => {
+                         {groupedMap.get(item).map((product) => {
                              return (
-                                 <tr className={"row-data-"+(product.isInStock ? 'in-stock' : this.props.inStockChecked ? 'hide': 'not-in-stock') }  key={product.name}>
+                                 <tr className={"row-data-"+(product.stocked ? 'in-stock' : this.props.inStockChecked ? 'hide': 'not-in-stock') }  key={product.name}>
                                      <TableRecord text={product.name}/>
                                      <TableRecord text={product.price}/>
                                  </tr>
