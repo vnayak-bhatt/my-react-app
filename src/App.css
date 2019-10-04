@@ -5,7 +5,29 @@
 .App-logo {
   height: 40vmin;
 }
+.wrapper{
+  margin: 10% 50% 10% 50%;
+  background-color: #282c34;
 
+  /*align-items: center;*/
+  /*justify-content: center;*/
+}
+.instock-checkbox{
+  display: flex;
+}
+.row-data-not-in-stock {
+  color: red;
+}
+
+.row-data-in-stock{
+color: darkslategray;
+}
+.row-data-hide{
+  display: none;
+}
+.instock-span{
+  min-width: 200px;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -16,7 +38,21 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.filter-search-input{
+}
 .App-link {
   color: #09d3ac;
+}
+.test-css{
+  float: left;
+  display: flex;
+}
+.Heading{
+  display: flex;
+  align-items: center;
+}
+.hide{
+  display: none;
+}
+.filter-component{
 }
