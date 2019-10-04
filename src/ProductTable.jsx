@@ -1,5 +1,7 @@
 import React from 'react';
+
 import TableRecord from './TableRecord'
+
 class ProductTable extends React.Component{
     constructor(props){
         super(props);
