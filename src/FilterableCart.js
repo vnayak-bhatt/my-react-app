@@ -1,7 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import axios from 'axios'
 
 import Filter from './Filter'
+import ProductTable from './ProductTable'
 class cartItems extends React.Component {
     constructor(props) {
         super(props);
@@ -67,7 +69,12 @@ class cartItems extends React.Component {
         };
 
     }
+    componentDidMount(){
+        // axios.get("http://my-json-server.typicode.com/habilelabs/fake-products/products").then(function (response) {
+        //     console.log(response.data, 'response');
+        // })
 
+    }
     filterListFunction() {
         console.log('seeararaAR', this.state.searchInput);
     }
@@ -83,87 +90,19 @@ class cartItems extends React.Component {
         }));
 
 
-        // let inventoryList = this.state.inventory.map((item) => {
-        //     let lists = <ul key={"item-" + item}>{item.category}
-        //         <li>
-        //             {item.name}
-        //         </li>
-        //     </ul>
-        // })
         return (
             <React.Fragment>
                 <div className="filter-component ">
                     <Filter parentCallback = {this.callbackFunction} inventory={this.inventory} />
                 </div>
                 <div>
-                    <table border="1">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {[...groupedMap.keys()].map((item, key) => {
-                                return <React.Fragment key={key + 'key'}>
-                                    <tr key="key" className="category">
-                                        <td colSpan={2}>{item}</td>
-                                    </tr>
-                                    {groupedMap.get(item).map((product, i) => {
-                                        return (
-                                            <tr className={"row-data-"+(product.isInStock ? 'in-stock' : this.state.inStockChecked ? 'hide': 'not-in-stock') }  key={product.name}>
-                                                <td>{product.name}</td>
-                                                <td>{product.price}</td>
-                                            </tr>
-                                        )
-                                    })
-                                    }
-                                </React.Fragment>
-                            })}
-                        </tbody>
-                    </table>
+                    <ProductTable inventory={this.inventory} searchInput={this.state.searchInput} inStockChecked={this.state.inStockChecked} />
                 </div>
             </React.Fragment>
 
         )
     }
 
-    /*// render() {*
-    //     let displayListAudi = ['Audi'];
-    //     let displayListBmw = ['BMW'];
-    //     this.state.inventory.forEach(e => {
-    //         console.log(e);
-    //             if(e.category==='Audi'){
-    //                 let test = <div><h1>{e.name}-{e.price}</h1></div>;
-    //                 displayListAudi.push(test)
-    //             }
-    //             else{
-    //                 let test = <div><h1>{e.name}-{e.price}</h1></div>;
-    //                 displayListBmw.push(test)
-    //             }
-    //     });
-    //     // if (display[e.category]) {
-    //         //     display[e.category].push('<div> <h1>{e.name} - {e.price}</h1> <br /></div>')
-    //         // }
-    //         // else if (!display[e.category]) {
-    //         //     display[e.category] = [];
-    //         //     display[e.category].push('<div><h1>{e.name} - {e.price}</h1> <br /></div>')
-    //         // }
-    //         // console.log('display', display);
-    //     return (
-    //             <div>
-    //                 <div className="Heading" >
-    //                     <h1>name</h1>-<h1>price</h1>
-    //                 </div>
-    //                 <div>
-    //                     {displayListAudi}
-    //                 </div>
-    //                 <div>
-    //                     {displayListBmw}
-    //                 </div>
-    //             </div>
-    //     )
-    // }*/
 }
 
 export default cartItems;

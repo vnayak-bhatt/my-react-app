@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import logo from './logo.svg';
 import './App.css';
@@ -55,35 +56,39 @@ class App extends React.Component {
         });
     }
     render() {
-       /* let display;
-       if(this.state.flag) {
-          display = <h1>counter===value{this.state.flag}</h1>;
-       }
-      else {
-         display = <h1>counter!==value</h1>;
-       }*/
        return (
+
             <div className="wrapper">
-                <FilterableCart/>
-
-
-                {/*<Header/>*/}
-
-                {/*<img src={logo} className="App-logo" alt="logo"/>*/}
-                {/*<p>*/}
-                    {/*{this.state.date.toString()}*/}
-                {/*</p>*/}
-                {/*{this.state.props}*/}
-                {/*<h4>The counter automatically increments after every one second until the value {this.state.value} is reached</h4>*/}
-                {/*{this.state.counter}*/}
-                {/*<div className="test-css">*/}
-                    {/*<button type="button" onClick={this.incrementFunction}>increment</button>*/}
-                    {/*<button type="button" onClick={this.decrementFunction.bind(this)}>decrement</button>*/}
-                    {/*<input type="text" placeholder="value" value={this.state.value} onChange={this.handleChange}/>*/}
-                {/*</div>*/}
-
-                {/*{display}*/}
-        </div>
+                <Router>
+                    <div>
+                        <div className="router-navbar">
+                            <nav >
+                                <ul className='router-list'>
+                                    <li className='router-list-item'>
+                                        <Link to="/cart">Cart</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/header">Header</Link>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+                        <Switch>
+                            <Route path="/cart">
+                                <FilterableCart />
+                            </Route>
+                            <Route path="/header">
+                                <Header  name="Vinayak" desc="Habilelabs"/>
+                            </Route>
+                            <Route path="/">
+                                <FilterableCart />
+                            </Route>
+                        </Switch>
+                    </div>
+                </Router>
+            </div>
     )
        }
 

@@ -25,6 +25,17 @@ color: darkslategray;
 .row-data-hide{
   display: none;
 }
+.router-navbar{
+  width: 100%;
+  background-color: darkblue;
+}
+.router-list{
+  list-style-type:none;
+}
+.router-list-item{
+  float: left;
+  margin-right: 10px;
+}
 .instock-span{
   min-width: 200px;
 }
