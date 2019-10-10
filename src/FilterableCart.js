@@ -27,7 +27,6 @@ class cartItems extends React.Component {
 
     componentDidMount() {
         axios.get("http://my-json-server.typicode.com/habilelabs/fake-products/products").then(res => {
-            console.log(res);
             this.setState({
                 inventory: res.data
             });
@@ -46,8 +45,7 @@ class cartItems extends React.Component {
                     <Filter parentCallback={this.callbackFunction} inventory={this.inventory}/>
                 </div>
                 <div>
-                    <ProductTable inventory={this.state.inventory} searchInput={this.state.searchInput}
-                                  inStockChecked={this.state.inStockChecked}/>
+                    <ProductTable inventory={this.state.inventory} searchInput={this.state.searchInput}/>
                 </div>
             </React.Fragment>
 

@@ -1,5 +1,8 @@
 import React from 'react';
-    
+import { connect } from 'react-redux'
+import {updateStockFilter} from './js/action/updateStockFilter'
+import {updateSearchFilter} from "./js/action/updateSearchFilter";
+
 class Filter extends React.Component {
     constructor(props) {
         super(props);
@@ -7,37 +10,39 @@ class Filter extends React.Component {
         this.inStock = false;
 
         this.handleChangeofCheckbox = this.handleChangeofCheckbox.bind(this);
-        this.handleChangeofInput = this.handleChangeofInput.bind(this);
-        this.sendData = this.sendData.bind(this);
+        this.handleChangeOfInput = this.handleChangeOfInput.bind(this);
+        // this.sendData = this.sendData.bind(this);
         //refs of search input and instock checkbox
         this.searchInput = React.createRef();
-        this.inStockRef = React.createRef();
     }
     //executes onChange of input
-    handleChangeofInput(event) {
-        this.searchValue = this.searchInput.current.value;
-        this.sendData('input',this.searchValue);
+    handleChangeOfInput(event) {
+        // console.log(event.value, this.searchInput.current.value)
+        this.props.updateSearchFilter(this.searchInput.current.value);
     }
     //executes when checkbox toggles
     handleChangeofCheckbox(event) {
-        this.inStock = event.target.checked;
-        this.sendData('checkbox',this.inStock);
+        this.props.updateStockFilter(event.target.checked)
     }
     //sends data to parent as a callback with the type to differentiate
-    sendData (type,data){
-        this.props.parentCallback(type, data);
-    }
+    // sendData (type,data){
+    //     this.props.parentCallback(type, data);
+    // }
     render(){
         return(
             <React.Fragment>
-                <input type="text" placeholder="search"  ref={this.searchInput} onChange={this.handleChangeofInput} className="filter-search-input"/>
+                <input type="text" placeholder="search"  ref={this.searchInput} onChange={this.handleChangeOfInput} className="filter-search-input"/>
                 <br />
                 <div className="instock-checkbox">
-                    <input type="checkBox" ref={this.inStockRef} name="inStock" onClick={this.handleChangeofCheckbox}/>
+                    <input type="checkBox"  name="inStock" onClick={this.handleChangeofCheckbox}/>
                     <span className="instock-span">Only show products in stock</span>{this.inStock}
                 </div>
             </React.Fragment>
         )
     }
 }
-export default Filter;
+const mapDispatchToProps = dispatch => ({
+    updateStockFilter: (stocked) =>   dispatch(updateStockFilter(stocked)),
+    updateSearchFilter: (searchValue) => dispatch(updateSearchFilter(searchValue))
+});
+export default connect(null, mapDispatchToProps)(Filter)

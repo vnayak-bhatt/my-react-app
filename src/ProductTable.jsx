@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux'
 
 import TableRecord from './TableRecord'
 
@@ -7,13 +8,14 @@ class ProductTable extends React.Component{
         super(props);
     }
     render(){
+        console.log( '=========', this.props)
         //filters data on te basis on search via input
         let filteredData = this.props.inventory.filter(e=>
             e.name.includes(this.props.searchInput)
         );
         //checks if data stocked or not
         let stockFiltered;
-        if(this.props.inStockChecked === true){
+        if(this.props.stocked === true){
             stockFiltered = filteredData.filter(e=> e.stocked === true);
         }else{
             stockFiltered = filteredData;
@@ -42,7 +44,7 @@ class ProductTable extends React.Component{
                          </tr>
                          {groupedMap.get(item).map((product) => {
                              return (
-                                 <tr className={"row-data-"+(product.stocked ? 'in-stock' : this.props.inStockChecked ? 'hide': 'not-in-stock') }  key={product.name}>
+                                 <tr className={"row-data-"+(product.stocked ? 'in-stock' : this.props.stocked ? 'hide': 'not-in-stock') }  key={product.name}>
                                      <TableRecord text={product.name}/>
                                      <TableRecord text={product.price}/>
                                  </tr>
@@ -57,4 +59,13 @@ class ProductTable extends React.Component{
      )
     }
 }
-export default ProductTable;
+const mapStateToProps = state => ({
+    stocked: state.stockFilterValue,
+    searchInput: state.stockSearchValue
+}) ;
+
+
+export default connect(
+    mapStateToProps,
+    null
+)(ProductTable);
