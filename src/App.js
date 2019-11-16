@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import './App.css';
 import Header from './Header'
 import FilterableCart from './FilterableCart'
+import TodoClass from './TodoClass'
 
 class App extends React.Component {
     constructor(props) {
@@ -22,8 +23,11 @@ class App extends React.Component {
                                     <li className='router-list-item'>
                                         <Link to="/cart">Cart</Link>
                                     </li>
-                                    <li>
+                                    <li className='router-list-item'>
                                         <Link to="/header">Header</Link>
+                                    </li>
+                                    <li >
+                                        <Link to="/todoclass">Todo</Link>
                                     </li>
                                 </ul>
                             </nav>
@@ -36,6 +40,9 @@ class App extends React.Component {
                             </Route>
                             <Route path="/header">
                                 <Header  name="Vinayak" desc="Habilelabs"/>
+                            </Route>
+                            <Route path="/todoclass">
+                                <TodoClass />
                             </Route>
                             <Route path="/">
                                 <FilterableCart />

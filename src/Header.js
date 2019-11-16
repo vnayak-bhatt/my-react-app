@@ -3,13 +3,13 @@ import React, {useState, useEffect} from 'react';
 export default function Header(props){
     const [name, setName] = useState('Vinayak');
     const [surname, setSurname] = useState('Bhatt');
-    const [width, setWidth] = useState(window.innerWidth);
+    // const [width, setWidth] = useState(window.innerWidth);
 
     function handleNameChange(e){
         setName(e.target.value)
     }
 
-    function handleSurnameChange(e){
+     const handleSurnameChange=(e)=>{
         setSurname(e.target.value)
     }
 
@@ -25,7 +25,7 @@ export default function Header(props){
             <p>Edit input to change the title of page</p>
             <input value={name} onChange={handleNameChange}/>
             <input value={surname} onChange={handleSurnameChange}/>
-            <p>width = {width}</p>
+            {/*<p>width = {width}</p>*/}
         </section>
     )
 }

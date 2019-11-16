@@ -4,11 +4,8 @@ import { connect } from 'react-redux'
 import TableRecord from './TableRecord'
 
 class ProductTable extends React.Component{
-    constructor(props){
-        super(props);
-    }
+
     render(){
-        console.log( '=========', this.props)
         //filters data on te basis on search via input
         let filteredData = this.props.inventory.filter(e=>
             e.name.includes(this.props.searchInput)

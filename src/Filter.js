@@ -8,7 +8,6 @@ class Filter extends React.Component {
         super(props);
         this.value = "";
         this.inStock = false;
-
         this.handleChangeofCheckbox = this.handleChangeofCheckbox.bind(this);
         this.handleChangeOfInput = this.handleChangeOfInput.bind(this);
         // this.sendData = this.sendData.bind(this);
